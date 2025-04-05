@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuOrderController">
+    <Label fx:id="chefNameLabel" text="Chef's Menu" />
+    <ListView fx:id="menuListView" prefHeight="200.0" prefWidth="200.0" />
+    <Button mnemonicParsing="false" onAction="#handleAddToOrder" text="Add to Order" />
+    <ListView fx:id="orderListView" prefHeight="200.0" prefWidth="200.0" />
+    <Button mnemonicParsing="false" onAction="#handlePlaceOrder" text="Checkout" /> <Button mnemonicParsing="false" onAction="#handleBack" text="Back" />
+</VBox>

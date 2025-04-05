@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ViewOrderController">
+    <ListView fx:id="orderListView" prefHeight="400.0" prefWidth="600.0" />
+    <HBox alignment="CENTER" spacing="10">
+        <ComboBox fx:id="ratingComboBox" promptText="Rate Chef (1-5)" visible="false" managed="false" />
+        <Button fx:id="rateChefButton" text="Rate Chef" onAction="#handleRateChef" visible="false" managed="false"/>
+    </HBox>
+    <Button mnemonicParsing="false" onAction="#handleBack" text="Back" />
+</VBox>

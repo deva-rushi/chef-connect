@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.BrowseChefsController">
+    <Label text="Browse Chefs by Cuisine" />
+    <ComboBox fx:id="cuisineComboBox" promptText="Select Cuisine" />
+    <ListView fx:id="chefsListView" />
+    <Button text="Select Chef" onAction="#handleSelectChef" />
+    <Button text="Back" onAction="#handleBack" />
+</VBox>

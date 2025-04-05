@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ChefMenuController">
+    <Label fx:id="chefNameLabel" text="Chef's Menu" />
+    <ListView fx:id="menuItemsListView" />
+    <Button text="Add to Order" onAction="#handleAddToOrder" />
+    <Button text="Place Order" onAction="#handlePlaceOrder" />
+    <Button text="Back" onAction="#handleBack" />
+</VBox>

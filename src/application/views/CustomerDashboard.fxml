@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.CustomerDashboardController">
+   <children>
+      <Button mnemonicParsing="false" onAction="#handlePlaceOrder" text="Place Order" />
+      <Button mnemonicParsing="false" onAction="#handleViewOrder" text="View Order" />
+      <Button mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+   </children>
+</VBox>

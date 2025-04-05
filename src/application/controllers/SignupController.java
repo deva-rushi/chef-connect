@@ -3,7 +3,7 @@ package application.controllers;
 import application.data.ChefData;
 import application.data.UserDatabase;
 import application.models.Chef;
-import application.models.User;
+import application.models.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +36,7 @@ public class SignupController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String role = roleComboBox.getValue();
-       
+
         System.out.println("Signup started. Role: " + role); // Debug
 
         if (username.isEmpty() || password.isEmpty() || role == null) {
@@ -49,14 +49,17 @@ public class SignupController {
             return;
         }
 
-        UserDatabase.addUser(new User(username, password, role));
-
         if (role.equals("Chef")) {
-            String cuisine = "Unspecified"; //Default cuisine.
+            String cuisine = "Unspecified"; // Default cuisine.
             Chef newChef = new Chef(username, password, cuisine);
-            System.out.println("Chef created: " + newChef.getUsername()); // Debug
+            UserDatabase.addUser(newChef);
             ChefData.addChef(newChef);
+            System.out.println("Chef created: " + newChef.getUsername()); // Debug
             System.out.println("Chef added successfully. ChefData map size: " + ChefData.getAllChefs().size()); // Debug
+        } else if (role.equals("Customer")) {
+            Customer newCustomer = new Customer(username, password, "");
+            UserDatabase.addUser(newCustomer);
+            System.out.println("Customer created: " + newCustomer.getUsername());
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/LoginScreen.fxml"));

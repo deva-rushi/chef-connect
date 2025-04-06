@@ -56,7 +56,7 @@ public class LoginController {
 
         if (selectedRole.equals("Chef")) {
             Chef chef = UserDatabase.getChef(username);
-            if (chef != null && chef.getPassword().equals(password)) {
+            if (chef != null && chef.checkPassword(password)) {
                 SessionManager.setUser(username, "Chef");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/ChefDashboard.fxml"));
                 Parent root = loader.load();
@@ -66,7 +66,7 @@ public class LoginController {
             }
         } else if (selectedRole.equals("Customer")) {
             Customer customer = UserDatabase.getCustomer(username);
-            if (customer != null && customer.getPassword().equals(password)) {
+            if (customer != null && customer.checkPassword(password)) {
                 SessionManager.setUser(username, "Customer");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/CustomerDashboard.fxml"));
                 Parent root = loader.load();

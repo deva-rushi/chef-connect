@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 public class ViewOrderController {
 
-	@FXML
+    @FXML
     private ListView<String> orderListView;
     @FXML
     private ComboBox<Integer> ratingComboBox;
@@ -47,13 +47,8 @@ public class ViewOrderController {
             orderListView.setItems(orderDetails);
 
             // Make the rating input visible only for completed orders
-            boolean completedOrderFound = false;
-            for (Order order : orders) {
-                if (order.getStatus().equalsIgnoreCase("completed")) {
-                    completedOrderFound = true;
-                    break;
-                }
-            }
+            boolean completedOrderFound = orders.stream()
+                    .anyMatch(order -> order.getStatus().equalsIgnoreCase("completed"));
 
             ratingComboBox.setVisible(completedOrderFound);
             ratingComboBox.setManaged(completedOrderFound);
@@ -72,10 +67,11 @@ public class ViewOrderController {
 
     @FXML
     private void handleRateChef(ActionEvent event) {
-        Order selectedOrder = ChefData.getOrdersByCustomer(SessionManager.getUsername()).stream()
-                .filter(order -> order.getStatus().equalsIgnoreCase("completed"))
-                .findFirst()
-                .orElse(null);
+        Order selectedOrder = orderListView.getSelectionModel().getSelectedItem() != null ?
+                             ChefData.getOrdersByCustomer(SessionManager.getUsername()).stream()
+                             .filter(order -> formatOrderDetails(order).equals(orderListView.getSelectionModel().getSelectedItem()))
+                             .findFirst()
+                             .orElse(null) : null;
 
         if (selectedOrder != null && ratingComboBox.getValue() != null) {
             int rating = ratingComboBox.getValue();
@@ -85,10 +81,24 @@ public class ViewOrderController {
                 ChefData.updateChef(chef);
                 // Optionally provide feedback to the user
                 System.out.println("Chef rated successfully!");
-                ratingComboBox.setVisible(false);
-                ratingComboBox.setManaged(false);
-                rateChefButton.setVisible(false);
-                rateChefButton.setManaged(false);
+
+                // Remove the rated order from the list and refresh the list
+                List<Order> orders = ChefData.getOrdersByCustomer(SessionManager.getUsername());
+                orders.removeIf(order -> order.getOrderId() == selectedOrder.getOrderId());
+                ObservableList<String> orderDetails = FXCollections.observableArrayList(orders.stream()
+                        .map(this::formatOrderDetails)
+                        .collect(Collectors.toList()));
+                orderListView.setItems(orderDetails);
+
+                // Check if there are any completed orders remaining.
+                boolean completedOrderFound = orders.stream()
+                        .anyMatch(order -> order.getStatus().equalsIgnoreCase("completed"));
+
+                ratingComboBox.setVisible(completedOrderFound);
+                ratingComboBox.setManaged(completedOrderFound);
+                rateChefButton.setVisible(completedOrderFound);
+                rateChefButton.setManaged(completedOrderFound);
+
             }
         }
     }

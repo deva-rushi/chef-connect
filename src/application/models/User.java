@@ -1,5 +1,7 @@
 package application.models;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class User {
     private String username;
     private String password;
@@ -7,8 +9,8 @@ public class User {
 
     public User(String username, String password, String role) {
         this.username = username;
-        this.password = password;
         this.role = role;
+        setPassword(password);
     }
 
     public String getUsername() {
@@ -24,7 +26,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 
     public String getRole() {
@@ -33,5 +35,9 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean checkPassword(String password) {
+        return BCrypt.checkpw(password, this.password);
     }
 }

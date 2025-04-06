@@ -43,16 +43,6 @@ public class LoginController {
             return;
         }
 
-        if (!isValidUsername(username)) {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Username must be 3-20 characters long and contain only letters, numbers, or underscores.");
-            return;
-        }
-
-        if (!isValidPassword(password)) {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Password must be at least 8 characters long and contain at least one letter, one number, and one special character.");
-            return;
-        }
-
         User user = UserDatabase.getUser(username);
         if (user == null) {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "User not found!");
@@ -68,7 +58,6 @@ public class LoginController {
             Chef chef = UserDatabase.getChef(username);
             if (chef != null && chef.checkPassword(password)) {
                 SessionManager.setUser(username, "Chef");
-                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Login completed successfully!");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/ChefDashboard.fxml"));
                 Parent root = loader.load();
                 primaryStage.setScene(new Scene(root, 800, 600));
@@ -79,7 +68,6 @@ public class LoginController {
             Customer customer = UserDatabase.getCustomer(username);
             if (customer != null && customer.checkPassword(password)) {
                 SessionManager.setUser(username, "Customer");
-                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Login completed successfully!");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/CustomerDashboard.fxml"));
                 Parent root = loader.load();
                 primaryStage.setScene(new Scene(root, 800, 600));
@@ -107,13 +95,5 @@ public class LoginController {
         SignupController controller = loader.getController();
         controller.setPrimaryStage(primaryStage);
         primaryStage.setScene(new Scene(root, 800, 600));
-    }
-
-    private boolean isValidUsername(String username) {
-        return username.matches("^[a-zA-Z0-9_]{3,20}$");
-    }
-
-    private boolean isValidPassword(String password) {
-        return password.matches("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{8,}$");
     }
 }

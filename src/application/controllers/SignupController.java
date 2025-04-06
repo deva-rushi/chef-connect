@@ -37,7 +37,17 @@ public class SignupController {
         String password = passwordField.getText();
         String role = roleComboBox.getValue();
 
-        System.out.println("Signup started. Role: " + role); // Debug
+        System.out.println("Signup started. Role: " + role);
+
+        if (!isValidUsername(username)) {
+            showAlert(Alert.AlertType.ERROR, "Signup Failed", "Username must be 3-20 characters long and contain only letters, numbers, or underscores.");
+            return;
+        }
+
+        if (!isValidPassword(password)) {
+            showAlert(Alert.AlertType.ERROR, "Signup Failed", "Password must be at least 8 characters long and contain at least one letter, one number, and one special character.");
+            return;
+        }
 
         if (username.isEmpty() || password.isEmpty() || role == null) {
             showAlert(Alert.AlertType.ERROR, "Signup Failed", "All fields are required!");
@@ -50,7 +60,7 @@ public class SignupController {
         }
 
         if (role.equals("Chef")) {
-            String cuisine = "Unspecified"; // Default cuisine.
+            String cuisine = "Unspecified";
             Chef newChef = new Chef(username, password, cuisine);
             UserDatabase.addUser(newChef);
             ChefData.addChef(newChef);
@@ -62,11 +72,21 @@ public class SignupController {
             System.out.println("Customer created: " + newCustomer.getUsername());
         }
 
+        showAlert(Alert.AlertType.INFORMATION, "Signup Successful", "Signup completed successfully!");
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/LoginScreen.fxml"));
         Parent root = loader.load();
         LoginController controller = loader.getController();
         controller.setPrimaryStage(primaryStage);
         primaryStage.setScene(new Scene(root, 800, 600));
+    }
+
+    private boolean isValidUsername(String username) {
+        return username.matches("^[a-zA-Z0-9_]{3,20}$");
+    }
+
+    private boolean isValidPassword(String password) {
+        return password.matches("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{8,}$");
     }
 
     @FXML

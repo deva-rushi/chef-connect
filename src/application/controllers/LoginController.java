@@ -16,6 +16,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.regex.Pattern;
+
 public class LoginController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
@@ -40,6 +42,11 @@ public class LoginController {
 
         if (username.isEmpty() || password.isEmpty() || selectedRole == null) {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "All fields are required!");
+            return;
+        }
+
+        if (!isValidUsername(username)) {
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Username must be 3-20 characters, alphanumeric with underscores.");
             return;
         }
 
@@ -95,5 +102,10 @@ public class LoginController {
         SignupController controller = loader.getController();
         controller.setPrimaryStage(primaryStage);
         primaryStage.setScene(new Scene(root, 800, 600));
+    }
+
+    private boolean isValidUsername(String username) {
+        String usernameRegex = "^[a-zA-Z0-9_]{3,20}$";
+        return Pattern.matches(usernameRegex, username);
     }
 }

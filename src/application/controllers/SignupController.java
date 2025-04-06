@@ -15,6 +15,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.regex.Pattern;
+
 public class SignupController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
@@ -46,6 +48,17 @@ public class SignupController {
 
         if (UserDatabase.userExists(username)) {
             showAlert(Alert.AlertType.ERROR, "Signup Failed", "User already exists!");
+            return;
+        }
+
+        // Username and Password validation
+        if (!isValidUsername(username)) {
+            showAlert(Alert.AlertType.ERROR, "Signup Failed", "Username must be 3-20 characters, alphanumeric with underscores.");
+            return;
+        }
+
+        if (!isValidPassword(password)) {
+            showAlert(Alert.AlertType.ERROR, "Signup Failed", "Password must be at least 8 characters, containing letters, numbers, and symbols.");
             return;
         }
 
@@ -84,5 +97,15 @@ public class SignupController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private boolean isValidUsername(String username) {
+        String usernameRegex = "^[a-zA-Z0-9_]{3,20}$";
+        return Pattern.matches(usernameRegex, username);
+    }
+
+    private boolean isValidPassword(String password) {
+        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+        return Pattern.matches(passwordRegex, password);
     }
 }

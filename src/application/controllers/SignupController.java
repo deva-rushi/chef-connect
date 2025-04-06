@@ -51,7 +51,6 @@ public class SignupController {
             return;
         }
 
-        // Username and Password validation
         if (!isValidUsername(username)) {
             showAlert(Alert.AlertType.ERROR, "Signup Failed", "Username must be 3-20 characters, alphanumeric with underscores.");
             return;
@@ -74,6 +73,8 @@ public class SignupController {
             UserDatabase.addUser(newCustomer);
             System.out.println("Customer created: " + newCustomer.getUsername());
         }
+
+        showAlert(Alert.AlertType.INFORMATION, "Signup Successful", "User created successfully!");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/LoginScreen.fxml"));
         Parent root = loader.load();

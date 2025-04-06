@@ -2,6 +2,7 @@
 package application;
 
 import application.controllers.LoginController;
+import application.utils.AppInitializer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+    	AppInitializer.initializeData();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/LoginScreen.fxml"));
         Parent root = loader.load();
         LoginController controller = loader.getController();

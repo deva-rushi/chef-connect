@@ -65,6 +65,7 @@ public class LoginController {
             Chef chef = UserDatabase.getChef(username);
             if (chef != null && chef.checkPassword(password)) {
                 SessionManager.setUser(username, "Chef");
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Logged in as Chef!");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/ChefDashboard.fxml"));
                 Parent root = loader.load();
                 primaryStage.setScene(new Scene(root, 800, 600));
@@ -75,6 +76,7 @@ public class LoginController {
             Customer customer = UserDatabase.getCustomer(username);
             if (customer != null && customer.checkPassword(password)) {
                 SessionManager.setUser(username, "Customer");
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Logged in as Customer!");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/CustomerDashboard.fxml"));
                 Parent root = loader.load();
                 primaryStage.setScene(new Scene(root, 800, 600));

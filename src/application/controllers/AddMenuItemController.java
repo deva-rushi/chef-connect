@@ -38,6 +38,10 @@ public class AddMenuItemController {
                 itemNameField.clear();
                 descriptionField.clear();
                 priceField.clear();
+
+                // Show a success alert
+                showAlert(Alert.AlertType.INFORMATION, "Item Added", itemName + " has been added to your menu.");
+
             } else {
                 showAlert(Alert.AlertType.ERROR, "Chef Not Found", "Chef with username " + chefUsername + " not found.");
             }

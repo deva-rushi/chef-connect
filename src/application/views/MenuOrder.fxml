@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuOrderController">
-    <Label fx:id="chefNameLabel" text="Chef's Menu" />
-    <ListView fx:id="menuListView" prefHeight="200.0" prefWidth="200.0" />
-    <Button mnemonicParsing="false" onAction="#handleAddToOrder" text="Add to Order" />
-    <ListView fx:id="orderListView" prefHeight="200.0" prefWidth="200.0" />
-    <Button mnemonicParsing="false" onAction="#handlePlaceOrder" text="Checkout" /> <Button mnemonicParsing="false" onAction="#handleBack" text="Back" />
-</VBox>
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuOrderController">
+    <top>
+        <Label fx:id="chefNameLabel" text="Chef's Menu" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-padding: 20px;" alignment="CENTER" maxWidth="Infinity" />
+    </top>
+    <left>
+        <VBox spacing="15" alignment="TOP_CENTER" prefWidth="350.0">
+            <padding>
+                <Insets top="20.0" right="0.0" bottom="20.0" left="20.0" />
+            </padding>
+            <Label text="Menu Items" style="-fx-font-weight: bold; -fx-margin-bottom: 10px;" />
+            <ListView fx:id="menuListView" prefHeight="300.0" style="-fx-border-color: #ddd; -fx-border-radius: 5px; -fx-padding: 10px;" />
+            <Button mnemonicParsing="false" onAction="#handleAddToOrder" text="Add to Order" prefWidth="150.0" style="-fx-padding: 10px 20px; -fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+        </VBox>
+    </left>
+    <right>
+        <VBox spacing="15" alignment="TOP_CENTER" prefWidth="350.0">
+            <padding>
+                <Insets top="20.0" right="20.0" bottom="20.0" left="0.0" />
+            </padding>
+            <Label text="Your Order" style="-fx-font-weight: bold; -fx-margin-bottom: 10px;" />
+            <ListView fx:id="orderListView" prefHeight="300.0" style="-fx-border-color: #ddd; -fx-border-radius: 5px; -fx-padding: 10px;" />
+            <HBox spacing="15" alignment="CENTER" style="-fx-margin-top: 20px;">
+                <Button mnemonicParsing="false" onAction="#handlePlaceOrder" text="Checkout" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+                <Button mnemonicParsing="false" onAction="#handleBack" text="Back" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #f8f9fa; -fx-text-fill: #333; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+        	</HBox>
+        </VBox>
+    </right>
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+    </padding>
+</BorderPane>

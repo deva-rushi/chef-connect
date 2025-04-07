@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.PlaceOrderController">
-    <Label text="Place Order (Placeholder)" />
-    <Button text="Back to Dashboard" onAction="#handleBack" />
-</VBox>
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.PlaceOrderController">
+    <center>
+        <VBox alignment="CENTER" spacing="20" maxWidth="400.0">
+            <padding>
+                <Insets top="60.0" right="40.0" bottom="60.0" left="40.0" />
+            </padding>
+            <Label text="Confirm Your Order" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-margin-bottom: 20px;" />
+            <Label text="(Placeholder for order details)" style="-fx-font-style: italic; -fx-text-fill: #777; -fx-margin-bottom: 20px;" />
+            <Button text="Place Order Now" style="-fx-padding: 10px 20px; -fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handlePlaceOrderConfirmation" prefWidth="180.0" />
+            <Button text="Back to Dashboard" style="-fx-padding: 10px 20px; -fx-background-color: #f8f9fa; -fx-text-fill: #333; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleBack" prefWidth="180.0" />
+        </VBox>
+    </center>
+</BorderPane>

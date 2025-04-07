@@ -3,12 +3,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
 
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.AddMenuItemController">
-    <Label text="Add Menu Item" />
-    <TextField fx:id="itemNameField" promptText="Item Name" />
-    <TextField fx:id="descriptionField" promptText="Description" />
-    <TextField fx:id="priceField" promptText="Price" />
-    <Button text="Add Item" onAction="#handleAddItem" />
-    <Button text="Back" onAction="#handleBack" />
+<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.AddMenuItemController">
+    <padding>
+        <Insets top="40.0" right="40.0" bottom="40.0" left="40.0" />
+    </padding>
+    <Label text="Add New Menu Item" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-margin-bottom: 20px;" />
+    <TextField fx:id="itemNameField" promptText="Item Name" prefWidth="280.0" style="-fx-padding: 10px; -fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-color: #f8f8f8;" />
+    <TextField fx:id="descriptionField" promptText="Description" prefWidth="280.0" style="-fx-padding: 10px; -fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-color: #f8f8f8;" />
+    <TextField fx:id="priceField" promptText="Price" prefWidth="280.0" style="-fx-padding: 10px; -fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-color: #f8f8f8;" />
+    <HBox spacing="15" alignment="CENTER" style="-fx-margin-top: 20px;">
+        <Button text="Add Item" style="-fx-padding: 10px 20px; -fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleAddItem" />
+        <Button text="Back" style="-fx-padding: 10px 20px; -fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleBack" />
+    </HBox>
 </VBox>

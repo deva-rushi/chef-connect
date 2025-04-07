@@ -4,6 +4,8 @@ import application.models.Chef;
 import application.models.Order;
 import application.data.ChefData;
 import application.utils.SessionManager;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -30,76 +33,104 @@ public class ViewOrderController {
     @FXML
     private Button rateChefButton;
 
+    private ObservableList<Order> customerOrders;
+
     @FXML
     public void initialize() {
         loadOrders();
         // Populate ratingComboBox
         ObservableList<Integer> ratings = FXCollections.observableArrayList(1, 2, 3, 4, 5);
         ratingComboBox.setItems(ratings);
+
+        // Add listener to handle rating controls visibility based on selection
+        orderListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue != null) {
+                    Order selectedOrder = getSelectedOrder(newValue);
+                    updateRatingControlsVisibility(selectedOrder);
+                } else {
+                    setRatingControlsInvisible();
+                }
+            }
+        });
+
+        // Initially hide rating controls
+        setRatingControlsInvisible();
     }
 
     private void loadOrders() {
         List<Order> orders = ChefData.getOrdersByCustomer(SessionManager.getUsername());
-        if (orders != null) {
-            ObservableList<String> orderDetails = FXCollections.observableArrayList(orders.stream()
-                    .map(this::formatOrderDetails)
-                    .collect(Collectors.toList()));
-            orderListView.setItems(orderDetails);
+        customerOrders = FXCollections.observableArrayList(orders);
+        ObservableList<String> orderDetails = FXCollections.observableArrayList(customerOrders.stream()
+                .map(this::formatOrderDetails)
+                .collect(Collectors.toList()));
+        orderListView.setItems(orderDetails);
+    }
 
-            // Make the rating input visible only for completed orders
-            boolean completedOrderFound = orders.stream()
-                    .anyMatch(order -> order.getStatus().equalsIgnoreCase("completed"));
-
-            ratingComboBox.setVisible(completedOrderFound);
-            ratingComboBox.setManaged(completedOrderFound);
-            rateChefButton.setVisible(completedOrderFound);
-            rateChefButton.setManaged(completedOrderFound);
+    private void updateRatingControlsVisibility(Order selectedOrder) {
+        if (selectedOrder != null && selectedOrder.getStatus().equalsIgnoreCase("completed")) {
+            ratingComboBox.setVisible(true);
+            ratingComboBox.setManaged(true);
+            rateChefButton.setVisible(true);
+            rateChefButton.setManaged(true);
+        } else {
+            setRatingControlsInvisible();
         }
+    }
+
+    private void setRatingControlsInvisible() {
+        ratingComboBox.setVisible(false);
+        ratingComboBox.setManaged(false);
+        rateChefButton.setVisible(false);
+        rateChefButton.setManaged(false);
+    }
+
+    private Order getSelectedOrder(String orderString) {
+        if (customerOrders != null && orderString != null) {
+            String[] parts = orderString.split(", ");
+            if (parts.length > 0 && parts[0].startsWith("Order ID: ")) {
+                try {
+                    int orderId = Integer.parseInt(parts[0].substring("Order ID: ".length()));
+                    return customerOrders.stream().filter(order -> order.getOrderId() == orderId).findFirst().orElse(null);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 
     private String formatOrderDetails(Order order) {
         return "Order ID: " + order.getOrderId() +
-                ", Chef: " + order.getChefUsername() +
-                ", Status: " + order.getStatus() +
-                ", Total: $" + order.getTotalPrice() +
-                ", Delivery Address: " + order.getDeliveryAddress();
+               ", Chef: " + order.getChefUsername() +
+               ", Status: " + order.getStatus() +
+               ", Total: $" + order.getTotalPrice() +
+               ", Delivery Address: " + order.getDeliveryAddress();
     }
 
     @FXML
     private void handleRateChef(ActionEvent event) {
-        Order selectedOrder = orderListView.getSelectionModel().getSelectedItem() != null ?
-                             ChefData.getOrdersByCustomer(SessionManager.getUsername()).stream()
-                             .filter(order -> formatOrderDetails(order).equals(orderListView.getSelectionModel().getSelectedItem()))
-                             .findFirst()
-                             .orElse(null) : null;
+        Order selectedOrder = getSelectedOrder(orderListView.getSelectionModel().getSelectedItem());
+        Integer rating = ratingComboBox.getValue();
 
-        if (selectedOrder != null && ratingComboBox.getValue() != null) {
-            int rating = ratingComboBox.getValue();
+        if (selectedOrder != null && rating != null && selectedOrder.getStatus().equalsIgnoreCase("completed")) {
             Chef chef = ChefData.getChef(selectedOrder.getChefUsername());
             if (chef != null) {
                 chef.addRating(rating);
                 ChefData.updateChef(chef);
-                // Optionally provide feedback to the user
-                System.out.println("Chef rated successfully!");
+                System.out.println("Chef rated successfully for Order ID: " + selectedOrder.getOrderId());
 
-                // Remove the rated order from the list and refresh the list
-                List<Order> orders = ChefData.getOrdersByCustomer(SessionManager.getUsername());
-                orders.removeIf(order -> order.getOrderId() == selectedOrder.getOrderId());
-                ObservableList<String> orderDetails = FXCollections.observableArrayList(orders.stream()
-                        .map(this::formatOrderDetails)
-                        .collect(Collectors.toList()));
-                orderListView.setItems(orderDetails);
-
-                // Check if there are any completed orders remaining.
-                boolean completedOrderFound = orders.stream()
-                        .anyMatch(order -> order.getStatus().equalsIgnoreCase("completed"));
-
-                ratingComboBox.setVisible(completedOrderFound);
-                ratingComboBox.setManaged(completedOrderFound);
-                rateChefButton.setVisible(completedOrderFound);
-                rateChefButton.setManaged(completedOrderFound);
-
+                // After successful rating, you might want to:
+                // 1. Provide feedback to the user (e.g., a confirmation message).
+                // 2. Optionally disable the rating controls for this order to prevent re-rating.
+                // For simplicity, let's just refresh the orders for now.
+                loadOrders();
             }
+        } else if (selectedOrder != null && !selectedOrder.getStatus().equalsIgnoreCase("completed")) {
+            new Alert(Alert.AlertType.WARNING, "You can only rate completed orders.").showAndWait();
+        } else {
+            new Alert(Alert.AlertType.WARNING, "Please select an order and a rating.").showAndWait();
         }
     }
 
@@ -111,7 +142,6 @@ public class ViewOrderController {
                 System.err.println("CustomerDashboard.fxml not found!");
                 return;
             }
-
             FXMLLoader loader = new FXMLLoader(location);
             Parent root = loader.load();
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();

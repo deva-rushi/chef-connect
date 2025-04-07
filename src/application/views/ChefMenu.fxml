@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ChefMenuController">
-    <Label fx:id="chefNameLabel" text="Chef's Menu" />
-    <ListView fx:id="menuItemsListView" />
-    <Button text="Add to Order" onAction="#handleAddToOrder" />
-    <Button text="Place Order" onAction="#handlePlaceOrder" />
-    <Button text="Back" onAction="#handleBack" />
-</VBox>
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ChefMenuController">
+    <top>
+        <Label fx:id="chefNameLabel" text="Chef's Menu" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-padding: 20px;" alignment="CENTER" maxWidth="Infinity" />
+    </top>
+    <center>
+        <ListView fx:id="menuItemsListView" prefWidth="400.0" prefHeight="300.0" style="-fx-border-color: #ddd; -fx-border-radius: 5px; -fx-padding: 10px;" />
+    </center>
+    <bottom>
+        <HBox spacing="15" alignment="CENTER" style="-fx-padding: 20px;">
+            <Button text="Add to Order" style="-fx-padding: 10px 20px; -fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleAddToOrder" />
+            <Button text="Place Order" style="-fx-padding: 10px 20px; -fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handlePlaceOrder" />
+            <Button text="Back" style="-fx-padding: 10px 20px; -fx-background-color: #f8f9fa; -fx-text-fill: #333; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleBack" />
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -84,6 +84,7 @@ public class ViewOrderController {
         ratingComboBox.setManaged(false);
         rateChefButton.setVisible(false);
         rateChefButton.setManaged(false);
+        ratingComboBox.setValue(null); // Clear any previous selection
     }
 
     private Order getSelectedOrder(String orderString) {
@@ -119,18 +120,23 @@ public class ViewOrderController {
             if (chef != null) {
                 chef.addRating(rating);
                 ChefData.updateChef(chef);
-                System.out.println("Chef rated successfully for Order ID: " + selectedOrder.getOrderId());
+                System.out.println("Chef rated successfully for Order ID: " + selectedOrder.getOrderId() + " with rating: " + rating);
 
-                // After successful rating, you might want to:
-                // 1. Provide feedback to the user (e.g., a confirmation message).
-                // 2. Optionally disable the rating controls for this order to prevent re-rating.
-                // For simplicity, let's just refresh the orders for now.
-                loadOrders();
+                // Show confirmation alert
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Rating Successful");
+                alert.setHeaderText(null);
+                alert.setContentText("You have rated " + chef.getUsername() + " with a rating of " + rating + "!");
+                alert.showAndWait();
+
+                // Optionally, you might want to disable the rating controls for this order here
+                // if you still want to prevent immediate re-rating within the same session.
+                // For now, we'll leave them enabled as per your request.
             }
         } else if (selectedOrder != null && !selectedOrder.getStatus().equalsIgnoreCase("completed")) {
             new Alert(Alert.AlertType.WARNING, "You can only rate completed orders.").showAndWait();
         } else {
-            new Alert(Alert.AlertType.WARNING, "Please select an order and a rating.").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Please select a completed order and a rating.").showAndWait();
         }
     }
 

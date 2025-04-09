@@ -1,8 +1,8 @@
 package application.utils;
 
-public class SessionManager {
+public class SessionManager {  //For managing the user session
     private static String username;
-    private static String role;
+    private static String role;  //Whether chef or customer
 
     public static void setUser(String user, String userRole) {
         username = user;

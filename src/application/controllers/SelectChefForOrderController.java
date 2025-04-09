@@ -31,18 +31,17 @@ public class SelectChefForOrderController {
     @FXML
     public void initialize() {
         if (sortComboBox == null) {
-            System.err.println("sortComboBox is null!"); // Debugging
+            System.err.println("sortComboBox is null!");
         }
         // Populate sort options
         sortComboBox.getItems().addAll("Rating (High to Low)", "Rating (Low to High)");
-        sortComboBox.setValue("Rating (High to Low)"); // Default sort
+        sortComboBox.setValue("Rating (High to Low)"); // Default sorting for chefs
 
         loadChefs();
 
-        // Customize the display of Chef objects in the ListView
-        chefsListView.setCellFactory(listView -> new ListCell<>() {
+        chefsListView.setCellFactory(listView -> new ListCell<>() {  // Customize the display of Chef objects in the ListView
             @Override
-            protected void updateItem(Chef chef, boolean empty) {
+            protected void updateItem(Chef chef, boolean empty) {  //Dynamically update list of chefs whenever data changes
                 super.updateItem(chef, empty);
                 if (empty || chef == null) {
                     setText(null);
@@ -52,10 +51,10 @@ public class SelectChefForOrderController {
             }
         });
 
-        // Add listener for sort selection
-        sortComboBox.setOnAction(this::handleSortChange);
+        
+        sortComboBox.setOnAction(this::handleSortChange);  // Add listener for sort selection
     }
-    private void loadChefs() {
+    private void loadChefs() {  //Load chef data sorted according sort combo box value.
         List<Chef> sortedChefs = ChefData.getAllChefs().stream()
                 .sorted(getComparator())
                 .collect(Collectors.toList());
@@ -64,7 +63,7 @@ public class SelectChefForOrderController {
         chefsListView.setItems(chefs);
     }
 
-    private Comparator<Chef> getComparator() {
+    private Comparator<Chef> getComparator() {  //Use comparator to compare chef ratings for sorting
         if (sortComboBox.getValue().equals("Rating (High to Low)")) {
             return Comparator.comparingDouble(Chef::getRating).reversed();
         } else {

@@ -26,7 +26,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));  //Hash and set password
     }
 
     public String getRole() {
@@ -38,6 +38,6 @@ public class User {
     }
 
     public boolean checkPassword(String password) {
-        return BCrypt.checkpw(password, this.password);
+        return BCrypt.checkpw(password, this.password);  //Check password using BCrypt library
     }
 }

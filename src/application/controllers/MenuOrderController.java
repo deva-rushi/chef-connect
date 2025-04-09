@@ -42,9 +42,9 @@ public class MenuOrderController {
     private void loadMenu() {
         if (chef != null) {
             List<MenuItem> menuItems = ChefData.getMenuItemsByChef(chef);
-            ObservableList<String> menuItemNames = FXCollections.observableArrayList(menuItems.stream()
+            ObservableList<String> menuItemNames = FXCollections.observableArrayList(menuItems.stream()  //Stream is used to get an iterable(called stream) for the collection which you can apply map, filter etc. to. So kind of how in Python the map, filter etc functions are applied to iterables
                     .map(item -> item.getItemName() + " - $" + item.getPrice()) // Add price to display
-                    .collect(Collectors.toList()));
+                    .collect(Collectors.toList()));  //Collect the modified stream iterable and gather them into thelist
             menuListView.setItems(menuItemNames);
         }
     }

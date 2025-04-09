@@ -38,8 +38,7 @@ public class ViewOrderController {
     @FXML
     public void initialize() {
         loadOrders();
-        // Populate ratingComboBox
-        ObservableList<Integer> ratings = FXCollections.observableArrayList(1, 2, 3, 4, 5);
+        ObservableList<Integer> ratings = FXCollections.observableArrayList(1, 2, 3, 4, 5);  // Populate combobox dropdownfor ratings
         ratingComboBox.setItems(ratings);
 
         // Add listener to handle rating controls visibility based on selection
@@ -48,7 +47,7 @@ public class ViewOrderController {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (newValue != null) {
                     Order selectedOrder = getSelectedOrder(newValue);
-                    updateRatingControlsVisibility(selectedOrder);
+                    updateRatingControlsVisibility(selectedOrder);  //User is only allowed to rate completed orders
                 } else {
                     setRatingControlsInvisible();
                 }
@@ -84,7 +83,7 @@ public class ViewOrderController {
         ratingComboBox.setManaged(false);
         rateChefButton.setVisible(false);
         rateChefButton.setManaged(false);
-        ratingComboBox.setValue(null); // Clear any previous selection
+        ratingComboBox.setValue(null); //Clear any previously set values
     }
 
     private Order getSelectedOrder(String orderString) {
@@ -92,7 +91,7 @@ public class ViewOrderController {
             String[] parts = orderString.split(", ");
             if (parts.length > 0 && parts[0].startsWith("Order ID: ")) {
                 try {
-                    int orderId = Integer.parseInt(parts[0].substring("Order ID: ".length()));
+                    int orderId = Integer.parseInt(parts[0].substring("Order ID: ".length()));  //First part of order item string contains order id.
                     return customerOrders.stream().filter(order -> order.getOrderId() == orderId).findFirst().orElse(null);
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
@@ -107,7 +106,7 @@ public class ViewOrderController {
                ", Chef: " + order.getChefUsername() +
                ", Status: " + order.getStatus() +
                ", Total: $" + order.getTotalPrice() +
-               ", Delivery Address: " + order.getDeliveryAddress();
+               ", Delivery Address: " + order.getDeliveryAddress();  //Order item string
     }
 
     @FXML
@@ -119,19 +118,14 @@ public class ViewOrderController {
             Chef chef = ChefData.getChef(selectedOrder.getChefUsername());
             if (chef != null) {
                 chef.addRating(rating);
-                ChefData.updateChef(chef);
+                ChefData.updateChef(chef);  //Update rating for chef
                 System.out.println("Chef rated successfully for Order ID: " + selectedOrder.getOrderId() + " with rating: " + rating);
 
-                // Show confirmation alert
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Rating Successful");
                 alert.setHeaderText(null);
                 alert.setContentText("You have rated " + chef.getUsername() + " with a rating of " + rating + "!");
                 alert.showAndWait();
-
-                // Optionally, you might want to disable the rating controls for this order here
-                // if you still want to prevent immediate re-rating within the same session.
-                // For now, we'll leave them enabled as per your request.
             }
         } else if (selectedOrder != null && !selectedOrder.getStatus().equalsIgnoreCase("completed")) {
             new Alert(Alert.AlertType.WARNING, "You can only rate completed orders.").showAndWait();

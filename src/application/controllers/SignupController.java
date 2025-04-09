@@ -39,7 +39,7 @@ public class SignupController {
         String password = passwordField.getText();
         String role = roleComboBox.getValue();
 
-        System.out.println("Signup started. Role: " + role); // Debug
+        System.out.println("Signup started. Role: " + role);
 
         if (username.isEmpty() || password.isEmpty() || role == null) {
             showAlert(Alert.AlertType.ERROR, "Signup Failed", "All fields are required!");
@@ -66,8 +66,8 @@ public class SignupController {
             Chef newChef = new Chef(username, password, cuisine);
             UserDatabase.addUser(newChef);
             ChefData.addChef(newChef);
-            System.out.println("Chef created: " + newChef.getUsername()); // Debug
-            System.out.println("Chef added successfully. ChefData map size: " + ChefData.getAllChefs().size()); // Debug
+            System.out.println("Chef created: " + newChef.getUsername());
+            System.out.println("Chef added successfully. ChefData map size: " + ChefData.getAllChefs().size());
         } else if (role.equals("Customer")) {
             Customer newCustomer = new Customer(username, password, "");
             UserDatabase.addUser(newCustomer);
@@ -79,12 +79,12 @@ public class SignupController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/LoginScreen.fxml"));
         Parent root = loader.load();
         LoginController controller = loader.getController();
-        controller.setPrimaryStage(primaryStage);
+        controller.setPrimaryStage(primaryStage);  //Load back login screen after signup
         primaryStage.setScene(new Scene(root, 800, 600));
     }
 
     @FXML
-    private void handleBackToLogin(ActionEvent event) throws Exception {
+    private void handleBackToLogin(ActionEvent event) throws Exception {  //for back button to go back to login screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/LoginScreen.fxml"));
         Parent root = loader.load();
         LoginController controller = loader.getController();
@@ -101,12 +101,12 @@ public class SignupController {
     }
 
     private boolean isValidUsername(String username) {
-        String usernameRegex = "^[a-zA-Z0-9_]{3,20}$";
+        String usernameRegex = "^[a-zA-Z0-9_]{3,20}$";  //Regex to check for username
         return Pattern.matches(usernameRegex, username);
     }
 
     private boolean isValidPassword(String password) {
-        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";  //Regex to match password. Password has to have at least 8 characters and have no whitespace, have at least one digit, uppercase letter, lowercase letter and one special character from @#$%^&+=!
         return Pattern.matches(passwordRegex, password);
     }
 }

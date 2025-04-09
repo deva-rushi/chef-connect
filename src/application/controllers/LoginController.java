@@ -40,8 +40,8 @@ public class LoginController {
         String password = passwordField.getText();
         String selectedRole = roleComboBox.getValue();
 
-        if (username.isEmpty() || password.isEmpty() || selectedRole == null) {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "All fields are required!");
+        if (username.isEmpty() || password.isEmpty() || selectedRole == null) {  //If any of the fields are null
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "All fields are required!");  //Raise alert in case of error
             return;
         }
 
@@ -57,7 +57,7 @@ public class LoginController {
         }
 
         if (!user.getRole().equals(selectedRole)) {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect role selected!");
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect role selected!");  //If incorrect user role is selected when trying to login
             return;
         }
 
@@ -67,7 +67,7 @@ public class LoginController {
                 SessionManager.setUser(username, "Chef");
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Logged in as Chef!");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/ChefDashboard.fxml"));
-                Parent root = loader.load();
+                Parent root = loader.load();  //Load chef dashboard
                 primaryStage.setScene(new Scene(root, 800, 600));
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username, password, or role selection!");
@@ -78,7 +78,7 @@ public class LoginController {
                 SessionManager.setUser(username, "Customer");
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Logged in as Customer!");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/CustomerDashboard.fxml"));
-                Parent root = loader.load();
+                Parent root = loader.load();  //Load customer dashboard
                 primaryStage.setScene(new Scene(root, 800, 600));
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username, password, or role selection!");
@@ -89,7 +89,7 @@ public class LoginController {
     /**
      * Utility method to show alert messages.
      */
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
+    private void showAlert(Alert.AlertType alertType, String title, String message) {  //Helper function for alerts
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -100,14 +100,14 @@ public class LoginController {
     @FXML
     private void handleSignup(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/SignupScreen.fxml"));
-        Parent root = loader.load();
+        Parent root = loader.load();  //Switch to Signup screen
         SignupController controller = loader.getController();
         controller.setPrimaryStage(primaryStage);
         primaryStage.setScene(new Scene(root, 800, 600));
     }
 
     private boolean isValidUsername(String username) {
-        String usernameRegex = "^[a-zA-Z0-9_]{3,20}$";
+        String usernameRegex = "^[a-zA-Z0-9_]{3,20}$";  //Regex to validate username. Username should be between 3-20 characters, and should contain alphanumeric or underscore
         return Pattern.matches(usernameRegex, username);
     }
 }

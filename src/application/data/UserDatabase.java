@@ -8,9 +8,9 @@ import application.models.Customer;
 import application.models.User;
 
 public class UserDatabase {
-    private static List<User> users = new ArrayList<>();
+    private static List<User> users = new ArrayList<>();  //Users are stored in ArrayList
 
-    public static boolean userExists(String username) {
+    public static boolean userExists(String username) { //iterate through users array and check if user exists
         for (User user : users) {
             if (user.getUsername().equals(username)) {
                 return true;
@@ -19,7 +19,7 @@ public class UserDatabase {
         return false;
     }
 
-    public static void addUser(User user) {
+    public static void addUser(User user) {  //Add new user to ArrayList
         users.add(user);
     }
 
@@ -32,7 +32,7 @@ public class UserDatabase {
         return null;
     }
 
-    public static Chef getChef(String username) {
+    public static Chef getChef(String username) {  //Get chef with matching username
         for (User user : users) {
             if (user instanceof Chef && user.getUsername().equals(username)) {
                 return (Chef) user;
@@ -41,7 +41,7 @@ public class UserDatabase {
         return null;
     }
 
-    public static Customer getCustomer(String username) {
+    public static Customer getCustomer(String username) {  //Get customer with matching username
         for (User user : users) {
             if (user instanceof Customer && user.getUsername().equals(username)) {
                 return (Customer) user;

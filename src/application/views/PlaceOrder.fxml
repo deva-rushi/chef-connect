@@ -11,8 +11,8 @@
             </padding>
             <Label text="Confirm Your Order" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-margin-bottom: 20px;" />
             <Label text="(Placeholder for order details)" style="-fx-font-style: italic; -fx-text-fill: #777; -fx-margin-bottom: 20px;" />
-            <Button text="Place Order Now" style="-fx-padding: 10px 20px; -fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handlePlaceOrderConfirmation" prefWidth="180.0" />
-            <Button text="Back to Dashboard" style="-fx-padding: 10px 20px; -fx-background-color: #f8f9fa; -fx-text-fill: #333; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleBack" prefWidth="180.0" />
+            <Button text="Place Order Now" style="-fx-padding: 10px 20px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handlePlaceOrderConfirmation" prefWidth="180.0" />
+            <Button text="Back to Dashboard" style="-fx-padding: 10px 20px; -fx-background-color: #607D8B; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleBack" prefWidth="180.0" />
         </VBox>
     </center>
 </BorderPane>

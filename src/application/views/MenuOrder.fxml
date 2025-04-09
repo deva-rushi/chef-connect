@@ -15,7 +15,7 @@
             </padding>
             <Label text="Menu Items" style="-fx-font-weight: bold; -fx-margin-bottom: 10px;" />
             <ListView fx:id="menuListView" prefHeight="300.0" style="-fx-border-color: #ddd; -fx-border-radius: 5px; -fx-padding: 10px;" />
-            <Button mnemonicParsing="false" onAction="#handleAddToOrder" text="Add to Order" prefWidth="150.0" style="-fx-padding: 10px 20px; -fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+            <Button mnemonicParsing="false" onAction="#handleAddToOrder" text="Add to Order" prefWidth="150.0" style="-fx-padding: 10px 20px; -fx-background-color: #546E7A; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
         </VBox>
     </left>
     <right>
@@ -26,8 +26,8 @@
             <Label text="Your Order" style="-fx-font-weight: bold; -fx-margin-bottom: 10px;" />
             <ListView fx:id="orderListView" prefHeight="300.0" style="-fx-border-color: #ddd; -fx-border-radius: 5px; -fx-padding: 10px;" />
             <HBox spacing="15" alignment="CENTER" style="-fx-margin-top: 20px;">
-                <Button mnemonicParsing="false" onAction="#handlePlaceOrder" text="Checkout" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
-                <Button mnemonicParsing="false" onAction="#handleBack" text="Back" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #f8f9fa; -fx-text-fill: #333; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+                <Button mnemonicParsing="false" onAction="#handlePlaceOrder" text="Checkout" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+                <Button mnemonicParsing="false" onAction="#handleBack" text="Back" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #607D8B; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
         	</HBox>
         </VBox>
     </right>

@@ -12,6 +12,6 @@
     <ListView fx:id="chefsListView" prefWidth="300.0" prefHeight="250.0" style="-fx-border-color: #ddd; -fx-border-radius: 5px;" />
     <HBox spacing="15" alignment="CENTER" style="-fx-margin-top: 20px;">
         <Button text="Select Chef" style="-fx-padding: 10px 20px; -fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleSelectChef" />
-        <Button text="Back" style="-fx-padding: 10px 20px; -fx-background-color: #f8f9fa; -fx-text-fill: #333; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleBack" />
+        <Button text="Back" style="-fx-padding: 10px 20px; -fx-background-color: #607D8B; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleBack" />
     </HBox>
 </VBox>

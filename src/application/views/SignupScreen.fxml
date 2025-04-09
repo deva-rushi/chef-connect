@@ -14,8 +14,8 @@
             <PasswordField fx:id="passwordField" promptText="Password" prefWidth="300.0" style="-fx-padding: 10px; -fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-color: #f8f8f8;" />
             <ComboBox fx:id="roleComboBox" promptText="Select Role" prefWidth="300.0" style="-fx-padding: 10px; -fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-color: #f8f8f8;" />
             <HBox spacing="15" alignment="CENTER" style="-fx-margin-top: 20px;">
-                <Button fx:id="signupButton" onAction="#handleSignup" text="Sign Up" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
-                <Button fx:id="backToLoginButton" onAction="#handleBackToLogin" text="Back to Login" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #f8f9fa; -fx-text-fill: #333; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+                <Button fx:id="signupButton" onAction="#handleSignup" text="Sign Up" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+                <Button fx:id="backToLoginButton" onAction="#handleBackToLogin" text="Back to Login" prefWidth="120.0" style="-fx-padding: 10px 20px; -fx-background-color: #607D8B; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #ddd; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
             </HBox>
         </VBox>
     </center>

@@ -15,7 +15,7 @@
     <TextField fx:id="descriptionField" promptText="Description" prefWidth="280.0" style="-fx-padding: 10px; -fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-color: #f8f8f8;" />
     <TextField fx:id="priceField" promptText="Price" prefWidth="280.0" style="-fx-padding: 10px; -fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-color: #f8f8f8;" />
     <HBox spacing="15" alignment="CENTER" style="-fx-margin-top: 20px;">
-        <Button text="Add Item" style="-fx-padding: 10px 20px; -fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleAddItem" />
-        <Button text="Back" style="-fx-padding: 10px 20px; -fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleBack" />
+        <Button text="Add Item" style="-fx-padding: 10px 20px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleAddItem" />
+        <Button text="Back" style="-fx-padding: 10px 20px; -fx-background-color: #607D8B; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" onAction="#handleBack" />
     </HBox>
 </VBox>

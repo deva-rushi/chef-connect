@@ -9,7 +9,7 @@
         <Insets top="60.0" right="40.0" bottom="60.0" left="40.0" />
     </padding>
     <Label text="Customer Dashboard" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-margin-bottom: 30px;" />
-    <Button mnemonicParsing="false" onAction="#handlePlaceOrder" text="Place Order" prefWidth="250.0" style="-fx-padding: 12px; -fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
-    <Button mnemonicParsing="false" onAction="#handleViewOrder" text="View Order" prefWidth="250.0" style="-fx-padding: 12px; -fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
-    <Button mnemonicParsing="false" onAction="#handleLogout" text="Logout" prefWidth="250.0" style="-fx-padding: 12px; -fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+    <Button mnemonicParsing="false" onAction="#handlePlaceOrder" text="Place Order" prefWidth="250.0" style="-fx-padding: 12px; -fx-background-color: #546E7A; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+    <Button mnemonicParsing="false" onAction="#handleViewOrder" text="View Order" prefWidth="250.0" style="-fx-padding: 12px; -fx-background-color: #1E88E5; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+    <Button mnemonicParsing="false" onAction="#handleLogout" text="Logout" prefWidth="250.0" style="-fx-padding: 12px; -fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
 </VBox>

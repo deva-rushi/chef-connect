@@ -1,4 +1,3 @@
-// Main.java (MODIFIED)
 package application;
 
 import application.controllers.LoginController;
@@ -14,10 +13,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
     	AppInitializer.initializeData();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/LoginScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/views/LoginScreen.fxml"));  //Login screen is the initial screen
         Parent root = loader.load();
         LoginController controller = loader.getController();
-        controller.setPrimaryStage(primaryStage); // Set the primaryStage here!
+        controller.setPrimaryStage(primaryStage);
         primaryStage.setTitle("ChefConnect");
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
